@@ -30,11 +30,12 @@ bash build.sh
 ##### Download from releases
 server-side:
 ```
-wget ...
-wget ...
+wget https://github.com/codeksion/LibSohal/releases/download/v0.1/backend
+wget https://github.com/codeksion/LibSohal/releases/download/v0.1/utils
+wget https://raw.githubusercontent.com/codeksion/LibSohal/main/backend/easyocrbin?token=GHSAT0AAAAAABKCRLGR54H7UNAIPUMIVX3GYUOFYMA -O easyorcbin
 ```
 client-side:
-Go to [releases]()
+Go to [releases](https://github.com/codeksion/LibSohal/releases/) or [download compiled apk](https://github.com/codeksion/LibSohal/releases/download/v0.1/libsohal-frontend.apk)
 
 ### Dev Note
 Still development/draft project :)
