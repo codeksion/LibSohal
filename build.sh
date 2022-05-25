@@ -18,7 +18,7 @@ go mod tidy -v || exit
 go build -x -v . || exit 
 go build -x -v ./cmd/utils || exit
 cp backend utils ../libsohal
-# python3 -c "import easyocr" || echo -e "python3 ya da easyocr kurulu değil\n$:\tpython3 -m pip install easyocr"; exit
+python3 -c "import easyocr" || echo -e "python3 ya da easyocr kurulu değil\n$:\tpython3 -m pip install easyocr"; exit
 chmod +x easyocrbin
 sudo cp easyocrbin /usr/bin/
 
