@@ -1,0 +1,14 @@
+[Unit]
+Description=LibSohal Backend software
+After=docker.target
+StartLimitIntervalSec=10
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=5
+ExecDir=/root/libsohal/
+ExecStart=/bin/bash /root/libsohal/backend
+
+[Install]
+WantedBy=multi-user.target
