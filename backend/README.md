@@ -101,6 +101,5 @@ Yetkili ekle
 
 
 
-[raifpy](https://github.com/raifpy) tarafından [codeksion](https://codeksion.net) adına, Şehit Ömer Halisdemir Anadolu Lisesi için geliştirildi.
 Project: **draft**
 
