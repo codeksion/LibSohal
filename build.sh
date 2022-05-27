@@ -36,7 +36,7 @@ StartLimitIntervalSec=10
 Type=simple
 Restart=always
 RestartSec=5
-ExecDir=$PWD/libsohal
+WorkingDirectory=$PWD/libsohal
 ExecStart=$PWD/libsohal
 
 [Install]
