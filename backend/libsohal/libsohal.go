@@ -76,7 +76,7 @@ func NewLibSohal(c Config) (l *LibSohal, err error) {
 		fiber.Config{
 
 			Prefork:     os.Getenv("PREFORK") != "",
-			ReadTimeout: time.Second * 5,
+			ReadTimeout: time.Second * 60, 
 			ErrorHandler: func(c *fiber.Ctx, e error) error {
 
 				return c.Status(500).Send(template.ShortCut{
@@ -86,7 +86,7 @@ func NewLibSohal(c Config) (l *LibSohal, err error) {
 			BodyLimit: 50 * 1024 * 1024,
 			AppName:   "LibSOHAL API",
 			//StreamRequestBody: true,
-			WriteTimeout: time.Second * 30,
+			// WriteTimeout: time.Second * 30, // Unnecessary
 		},
 	)
 
