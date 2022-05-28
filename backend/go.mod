@@ -6,8 +6,10 @@ require (
 	github.com/bregydoc/gtranslate v0.0.0-20200913051839-1bd07f6c1fc5
 	github.com/ciehanski/libgen-cli v1.0.7
 	github.com/gofiber/fiber/v2 v2.23.0
+	github.com/mattboran/libgen-go v1.0.0
 	github.com/mkideal/cli v0.2.7
 	github.com/nwidger/jsoncolor v0.3.1
+	github.com/patrickmn/go-cache v2.1.0+incompatible
 	github.com/shirou/gopsutil/v3 v3.22.3
 	go.mongodb.org/mongo-driver v1.8.0
 
@@ -22,7 +24,7 @@ require (
 	github.com/klauspost/compress v1.13.6 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
-	github.com/valyala/fasthttp v1.31.0 // indirect
+	github.com/valyala/fasthttp v1.31.0
 	github.com/valyala/tcplisten v1.0.0 // indirect
 	github.com/xdg-go/pbkdf2 v1.0.0 // indirect
 	github.com/xdg-go/scram v1.0.2 // indirect

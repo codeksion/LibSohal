@@ -4,6 +4,8 @@ import (
 	booksearch "backend/libsohal/book_search"
 	booksearchgoogle "backend/libsohal/book_search/book_search_google"
 	"backend/libsohal/bookfinder"
+	"backend/libsohal/imageproxy"
+	"backend/libsohal/libgen"
 	"log"
 
 	//"backend/libsohal/ipc"
@@ -15,6 +17,7 @@ import (
 	"time"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/valyala/fasthttp"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -34,6 +37,8 @@ type LibSohal struct {
 	//Ipc         ipc.Ipc
 	// ApiBook        *apibook.GoogleApisBooks
 	// ApiBookPreview *apibookpreview.ApiBookPreview
+	Libgen      *libgen.Libgen
+	ImageProxy  *imageproxy.ImageProxy
 	BookFinder  *bookfinder.BookFinder
 	ImageRouter *ImageRouter
 
@@ -49,6 +54,24 @@ func NewLibSohal(c Config) (l *LibSohal, err error) {
 			booksearchgoogle.NewGoogleApisBooks(),
 		},
 		BookFinder: bookfinder.NewBookFinder(),
+		ImageProxy: imageproxy.NewImageProxy(imageproxy.Config{
+			Duration: time.Minute,
+		}),
+		Libgen: libgen.NewLibgen(libgen.Config{
+			AddImageCache: func(c *fiber.Ctx, _url string) string {
+
+				l.ImageProxy.Put(_url)
+
+				var u = &fasthttp.URI{}
+				c.Request().URI().CopyTo(u)
+				u.SetPath("/imageproxy")
+				u.SetQueryString("url=" + _url)
+
+				return u.String()
+			}, //! Bad desine!
+			//Url: ,// URL
+		}), // TODO
+
 	}
 	// l.Ipc, err = ipc.NewServer(ipc.Config{
 	// 	SocketPath: "libsohal",
@@ -76,7 +99,7 @@ func NewLibSohal(c Config) (l *LibSohal, err error) {
 		fiber.Config{
 
 			Prefork:     os.Getenv("PREFORK") != "",
-			ReadTimeout: time.Second * 60, 
+			ReadTimeout: time.Second * 60,
 			ErrorHandler: func(c *fiber.Ctx, e error) error {
 
 				return c.Status(500).Send(template.ShortCut{

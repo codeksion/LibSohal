@@ -7,7 +7,7 @@ StartLimitIntervalSec=10
 Type=simple
 Restart=always
 RestartSec=5
-ExecDir=/root/libsohal/
+WorkingDirectory=/root/libsohal/
 ExecStart=/bin/bash /root/libsohal/backend
 
 [Install]

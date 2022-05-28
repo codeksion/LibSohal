@@ -225,5 +225,11 @@ func (l *LibSohal) Handle() {
 
 	})
 
+	l.Fiber.Get("/imageproxy", l.ImageProxy.FiberHandler)
+
+	l.Fiber.Get("/cbd", l.Libgen.SearchHandler) // can book dowloadable?
+
+	l.Fiber.Get("/db", l.Libgen.DownloadHandler)
+
 	l.YetkiliMiddleware()
 }
