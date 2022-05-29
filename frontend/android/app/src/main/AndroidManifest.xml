@@ -6,10 +6,9 @@
     
    <application
         android:requestLegacyExternalStorage="true"
-        android:label="sohal_kutuphane"
+        android:label="LibSohal"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
-        <activity android:name="ng.com.piccmaq.flutter.flutter_mobile_vision_2.ocr.OcrCaptureActivity" />
+        android:icon="@mipmap/launcher_icon">
          
         <activity
             android:name=".MainActivity"
