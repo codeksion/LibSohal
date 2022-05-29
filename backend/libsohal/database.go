@@ -42,6 +42,7 @@ var replaceMap = map[string][]string{
 type GetBooksConfig struct {
 	SortByNewest bool
 	Random       bool
+	Max          int
 }
 
 func (l *LibSohal) AddBook(ctx context.Context, b template.Book) error {
@@ -89,19 +90,26 @@ func (l *LibSohal) GetBooks(ctx context.Context, page int, b any, c ...GetBooksC
 		if c[0].SortByNewest {
 			options.SetSort(bson.M{"_id": -1})
 		}
+		if c[0].Max != 0 && c[0].Max < 50 {
 
-		if c[0].Random { // Test edilmedi!
-			if cursor, err = l.Mongo.Database(template.MongoBookDatabase).Collection(template.MongoBookCollection).Aggregate(ctx, mongo.Pipeline{
-				{
-					{
-						Key:   "sample",
-						Value: bson.M{"size": max},
-					},
-				},
-			}); err != nil {
-				return
-			}
+			max = int64(c[0].Max)
+			skip = int64(page-1) * max
+			options.Limit = &max
+			options.Skip = &skip
 		}
+
+		// if c[0].Random { // Test edilmedi!
+		// 	if cursor, err = l.Mongo.Database(template.MongoBookDatabase).Collection(template.MongoBookCollection).Aggregate(ctx, mongo.Pipeline{
+		// 		{
+		// 			{
+		// 				Key:   "sample",
+		// 				Value: bson.M{"size": max},
+		// 			},
+		// 		},
+		// 	}); err != nil {
+		// 		return
+		// 	}
+		// } // TODO
 
 	}
 

@@ -17,6 +17,7 @@ import (
 
 type BookSearchOptions struct {
 	Yeni     bool   `json:"yeni"`
+	Adet     int    `json:"adet"`
 	Sayfa    int    `json:"sayfa"`
 	Baslik   string `json:"beslik"`
 	Dil      string `json:"dil"`
@@ -105,6 +106,7 @@ func (l *LibSohal) Handle() {
 
 		yanit, err := l.GetBooks(c.Context(), bs.Sayfa, m, GetBooksConfig{
 			SortByNewest: bs.Yeni,
+			Max:          bs.Adet,
 			//Random:       bs.Rastgele,
 		})
 		if err != nil {
