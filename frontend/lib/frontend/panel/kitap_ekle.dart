@@ -58,6 +58,8 @@ class _PanelKitapEkleState extends State<PanelKitapEkle> {
   List<String> kitapKonumu = [];
   var kitapKonumuController = TextEditingController();
 
+  // What a sh*tty code. However i don't want to waste my time to fix it
+
   List<Fotograflar> fotograflar = [];
 
   int ocrbuttonstate = 0; // 0 wait | 1 loading | 2 error
@@ -498,8 +500,10 @@ class _PanelKitapEkleState extends State<PanelKitapEkle> {
                         var iv = fotograflar[p0];
                         var i2v = fotograflar[p1];
 
-                        fotograflar[p0] = i2v;
-                        fotograflar[p1] = iv;
+                        setState(() {
+                          fotograflar[p0] = i2v;
+                          fotograflar[p1] = iv;
+                        }); // ?
                       },
                       onRemoved: (i) {
                         fotograflar.removeAt(i);

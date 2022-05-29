@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -64,6 +65,7 @@ class _BooksViewState extends State<BooksView> {
       //print("new request length: ${yenit.books?.length}");
       total_items = yenit.total_items ?? 0;
       //print("totalitems: $total_items");
+
       booklist ??= [];
 
       for (var i in (yenit.books ?? <Book>[])) {
@@ -72,6 +74,8 @@ class _BooksViewState extends State<BooksView> {
           booklist!.add(i);
         }
       }
+
+      print("booklist length: ${booklist!.length}");
 
       //widget.booklist!.addAll(yenit);
 
@@ -277,11 +281,12 @@ class ViewBooksListView extends StatelessWidget {
                             /*colorFilter: ColorFilter.mode(
                                 Colors.black54, BlendMode.difference),*/ //TODO
                             fit: BoxFit.cover,
-                            image: NetworkImage(ServerURL.normalized(
-                                (kitap.fotograflar != null &&
-                                        kitap.fotograflar!.isNotEmpty)
-                                    ? kitap.fotograflar!.first
-                                    : ""))),
+                            image: CachedNetworkImageProvider(
+                                ServerURL.normalized(
+                                    (kitap.fotograflar != null &&
+                                            kitap.fotograflar!.isNotEmpty)
+                                        ? kitap.fotograflar!.first
+                                        : ""))),
                       )),
                   //TODO
                   Positioned(

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/painting.dart';
 import 'package:sohal_kutuphane/service/service.dart';
 
@@ -44,5 +45,6 @@ class ServerURL {
   }
 
   String get static => Service.config.ApiURL + "/static/" + url;
-  ImageProvider get image => NetworkImage(ServerURL.normalized(url));
+  ImageProvider get image =>
+      CachedNetworkImageProvider(ServerURL.normalized(url));
 }

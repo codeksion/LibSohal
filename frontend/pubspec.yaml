@@ -54,6 +54,8 @@ dependencies:
   animated_text_kit: ^4.2.1
   fsearch: ^1.0.1
   delayed_display: ^2.0.0
+  cached_network_image: ^3.2.1
+  qr_flutter: ^4.0.0
   #camera: ^0.9.5+1
   #flutter_mobile_vision_2: ^0.1.13
   

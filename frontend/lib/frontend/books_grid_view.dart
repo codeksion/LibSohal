@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sohal_kutuphane/backend/image.dart';
@@ -50,8 +51,8 @@ class ViewBookListGrid extends StatelessWidget {
                     child: Material(
                       child: Ink.image(
                           fit: BoxFit.cover,
-                          image: NetworkImage(ServerURL.normalized(
-                              (kitap.fotograflar != null &&
+                          image: CachedNetworkImageProvider(
+                              ServerURL.normalized((kitap.fotograflar != null &&
                                       kitap.fotograflar!.isNotEmpty)
                                   ? kitap.fotograflar!.first
                                   : ""))),

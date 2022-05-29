@@ -19,17 +19,23 @@ class ConfigAdapter extends TypeAdapter<Config> {
     return Config(
       ApiURL: fields[0] as String,
       DefaultImageURL: fields[1] as String,
-    );
+    )
+      ..WifiSSID = fields[2] as String?
+      ..WifiPass = fields[3] as String?;
   }
 
   @override
   void write(BinaryWriter writer, Config obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.ApiURL)
       ..writeByte(1)
-      ..write(obj.DefaultImageURL);
+      ..write(obj.DefaultImageURL)
+      ..writeByte(2)
+      ..write(obj.WifiSSID)
+      ..writeByte(3)
+      ..write(obj.WifiPass);
   }
 
   @override

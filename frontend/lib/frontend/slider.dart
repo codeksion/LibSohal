@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:sohal_kutuphane/backend/image.dart';
@@ -33,7 +34,11 @@ class ImageSlider extends StatelessWidget {
                   //borderRadius: BorderRadius.,
                   Ink.image(
                 //colorFilter:const ColorFilter.mode(Colors.grey, BlendMode.modulate),
-                image: NetworkImage(ServerURL.normalized(imageList[index])),
+                //*image: NetworkImage(ServerURL.normalized(imageList[index])),
+                image: CachedNetworkImageProvider(
+                  ServerURL.normalized(imageList[index]),
+                ),
+
                 fit: BoxFit.cover,
               ),
             ),

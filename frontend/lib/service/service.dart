@@ -11,23 +11,36 @@ class Config {
   @HiveField(1)
   late String DefaultImageURL;
 
+  @HiveField(2)
+  String? WifiSSID;
+
+  @HiveField(3)
+  String? WifiPass;
+
   Config({required this.ApiURL, required this.DefaultImageURL});
 
   Config.defaultConfig() {
     ApiURL = "https://libsohal.codeksion.net"; // Type your server ip
     DefaultImageURL = "https://cdn.codeksion.net/book_2300x1500.gif";
+    WifiSSID = "LibSohal Network";
+    WifiPass = "12345678";
   }
 
   Map<String, dynamic> toJson() {
     return {
       "ApiURL": ApiURL,
       "DefaultImageURL": DefaultImageURL,
+      "WifiSSID": WifiSSID,
+      "WifiPass": WifiPass,
     };
   }
 
   Config.fromJson(Map<String, dynamic> json) {
-    ApiURL = json["ApiURL"];
-    DefaultImageURL = json["DefaultImageURL"];
+    ApiURL = json["ApiURL"] ?? Config.defaultConfig().ApiURL;
+    DefaultImageURL =
+        json["DefaultImageURL"] ?? Config.defaultConfig().DefaultImageURL;
+    WifiSSID = json["WifiSSID"] ?? Config.defaultConfig().WifiSSID;
+    WifiPass = json["WifiPass"] ?? Config.defaultConfig().WifiPass;
   }
 }
 
@@ -123,5 +136,13 @@ class Service {
         },
       ),
     );
+  }
+
+  static String toWifiQR() {
+    String text = 'WIFI:T:WPA;S:${Service.config.WifiSSID}';
+    if (Service.config.WifiPass != null && Service.config.WifiPass != "") {
+      text += ';P:"${Service.config.WifiPass}";;';
+    }
+    return text;
   }
 }

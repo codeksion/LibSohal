@@ -3,9 +3,6 @@ import 'dart:math';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:searchbar_animation/searchbar_animation.dart';
-import 'package:sohal_kutuphane/backend/borrow.dart';
-import 'package:sohal_kutuphane/backend/layout.dart';
 import 'package:sohal_kutuphane/frontend/BookBarcodeAndUserID.dart';
 import 'package:sohal_kutuphane/frontend/book_details_borrowable.dart';
 import 'package:sohal_kutuphane/frontend/books_catagories.dart';
@@ -199,7 +196,7 @@ class Home extends StatelessWidget {
                 title: "İçerikler",
                 bookquery: {
                   "_sayfa": 1,
-                  "adet": "10",
+                  "adet": "50",
                   "yeni": "false",
                   "rastgele":
                       "true", //https://stackoverflow.com/questions/2824157/random-record-from-mongodb
