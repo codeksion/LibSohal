@@ -99,8 +99,9 @@ func NewLibSohal(c Config) (l *LibSohal, err error) {
 		fiber.Config{
 
 			Prefork:      os.Getenv("PREFORK") != "",
-			ReadTimeout:  time.Second * 60,
+			ReadTimeout:  time.Second * 30,
 			WriteTimeout: time.Second * 30,
+
 			ErrorHandler: func(c *fiber.Ctx, e error) error {
 
 				return c.Status(500).Send(template.ShortCut{
