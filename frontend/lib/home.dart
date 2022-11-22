@@ -133,17 +133,33 @@ class Home extends StatelessWidget {
                         padding: EdgeInsets.only(left: 10, right: 10),
                         child: TextField(
                           maxLines: 1,
-                          onSubmitted: (v) {
-                            textfieldcontroller.clear();
+                          onEditingComplete: () {
+                            print(
+                                "search:controller: ${textfieldcontroller.text}");
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => BookSearch(
-                                    value: v,
+                                    value: textfieldcontroller.text.trim(),
                                     mkey: "baslik",
                                   ),
                                 ));
+
+                            //textfieldcontroller.clear();
                           },
+                          // onSubmitted: (v) {
+                          //   print("search: $v");
+                          //   Navigator.push(
+                          //       context,
+                          //       MaterialPageRoute(
+                          //         builder: (context) => BookSearch(
+                          //           value: v,
+                          //           mkey: "baslik",
+                          //         ),
+                          //       ));
+
+                          //   textfieldcontroller.clear();
+                          // },
 
                           controller: textfieldcontroller,
 
@@ -191,6 +207,7 @@ class Home extends StatelessWidget {
                 title: "En Yeniler",
                 bookquery: {"yeni": "true", "adet": "20"},
                 otoRefresh: Duration(minutes: 5),
+                //errorText: "Ağa bağlı olmayabilirsin!",
               ),
               BooksView(
                 title: "İçerikler",

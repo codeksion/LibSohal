@@ -28,7 +28,6 @@ class ImageSlider extends StatelessWidget {
             clipBehavior: Clip.antiAlias,
             child: Container(
               width: MediaQuery.of(context).size.width,
-
               //color: Colors.green,
               child:
                   //borderRadius: BorderRadius.,

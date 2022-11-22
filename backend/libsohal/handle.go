@@ -5,11 +5,15 @@ import (
 	"backend/libsohal/template"
 	"errors"
 	"fmt"
+	"log"
+	"net/http"
+	"os"
 	"reflect"
 	"strconv"
 	"strings"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/filesystem"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	fiberrec "github.com/gofiber/fiber/v2/middleware/recover"
 	"go.mongodb.org/mongo-driver/bson"
@@ -232,6 +236,17 @@ func (l *LibSohal) Handle() {
 	l.Fiber.Get("/cbd", l.Libgen.SearchHandler) // can book dowloadable?
 
 	l.Fiber.Get("/db", l.Libgen.DownloadHandler)
+
+	l.Fiber.Use(filesystem.New(
+		filesystem.Config{
+			Root:  http.Dir("./public"),
+			Index: "index.html",
+		},
+	))
+
+	if _, err := os.Stat("./public"); err != nil {
+		log.Printf("public directory not exists! ")
+	}
 
 	l.YetkiliMiddleware()
 }

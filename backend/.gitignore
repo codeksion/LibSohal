@@ -1,4 +1,6 @@
 backend
-static/*
-student_photos/*
+utils
+/static/
+/student_photos/
 .env
+/public/

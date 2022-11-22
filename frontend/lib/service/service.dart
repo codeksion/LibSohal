@@ -1,6 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-
+import 'package:flutter/services.dart';
+import "dart:html" as html;
 part 'service.g.dart';
 
 @HiveType(typeId: 0)
@@ -20,7 +22,8 @@ class Config {
   Config({required this.ApiURL, required this.DefaultImageURL});
 
   Config.defaultConfig() {
-    ApiURL = "https://libsohal.codeksion.net"; // Type your server ip
+    //ApiURL = "https://libsohal.codeksion.net"; // Type your server ip
+    ApiURL = Uri.base.toString().substring(0, (Uri.base.toString().length - 3));
     DefaultImageURL = "https://cdn.codeksion.net/book_2300x1500.gif";
     WifiSSID = "LibSohal Network";
     WifiPass = "12345678";
@@ -66,6 +69,12 @@ class Service {
   Future<void> init() async {
     print("init ediliyor");
     WidgetsFlutterBinding.ensureInitialized();
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    if (kIsWeb) {
+      html.document.documentElement!.requestFullscreen().catchError((e) {
+        print("fullscreen error: $e");
+      });
+    }
     await Future.delayed(Duration(seconds: 1));
     if (inited) {
       return;

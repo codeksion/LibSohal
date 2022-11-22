@@ -7,6 +7,8 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:sohal_kutuphane/backend/layout.dart';
 import 'package:sohal_kutuphane/backend/request.dart';
 import 'package:sohal_kutuphane/service/service.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class EbookAsButton extends StatefulWidget {
   final String title;
@@ -91,8 +93,9 @@ class EBookDownloaderClient extends StatelessWidget {
       body: IntroductionScreen(
         next: Text("Sonraki aşama"),
         back: Text("Önceki aşama"),
-        done: Text("Tamamdır!"),
+        done: Text("İndir!"),
         onDone: () {
+          launchUrlString("${Service.config.ApiURL}/db?query=$title");
           Navigator.of(context).pop();
         },
         showNextButton: true,
@@ -108,123 +111,123 @@ class EBookDownloaderClient extends StatelessWidget {
               ),
               title: title,
               body:
-                  "Kitabın hazır. Hazır olmasına ama..\nOkumak istediğin kitap: '${(book?.baslik ?? 'bilinmeyen')}'\nBulabildiğim kitap: '$title'\n\nAradığını bulabildiysem, telefonunu hazırla; buyur devam et :)"),
-          PageViewModel(
-            title: "Seni ağa bağlayalım!",
-            decoration: PageDecoration(
-              bodyAlignment: Alignment.center,
-            ),
-            bodyWidget: Center(
-              //padding: EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  QrImage(
-                    data: Service.toWifiQR(),
-                    backgroundColor: Colors.white,
-                    version: QrVersions.auto,
-                    size: 320,
-                    gapless: true,
-                    semanticsLabel: "Connect to ${Service.config.WifiSSID}",
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "Akıllı telefon yazılımın destekliyorsa yukarıdaki Qr kodu okutarak ağa bağlanabilirsin.",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 25),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text.rich(TextSpan(
-                          text: "Wifi SSID: ",
-                          style: TextStyle(),
-                          children: [
-                            TextSpan(
-                              text: Service.config.WifiSSID,
-                              style: TextStyle(color: Colors.orange),
-                            ),
-                          ])),
-                      Text.rich(TextSpan(text: "Wifi Pass: ", children: [
-                        TextSpan(
-                          text: Service.config.WifiPass ?? "",
-                          style: TextStyle(color: Colors.orange),
-                        ),
-                      ])),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Text(
-                    "Dipnot: E-kitabı akıllı telefon/tabletine indirilebilmek için bu ağa bağlı olmak zorundasın.",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 12),
-                  ),
-                ],
-              ),
-            ),
-            useScrollView: false,
-          ),
-          PageViewModel(
-            title: "Haydi, indiiir",
-            bodyWidget: Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    "Aşağıdaki QR kodu okutarak içeriği indirebilirsin",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  QrImage(
-                    data:
-                        "${Service.config.ApiURL}/db?query=${Uri.encodeQueryComponent(title)}",
-                    backgroundColor: Colors.white,
-                    version: QrVersions.auto,
-                    size: 320,
-                    gapless: true,
-                    semanticsLabel: "Download the document",
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Text(
-                    "Dökümanı indirirken ${Service.config.WifiSSID} ağından ayrılma.\n${Service.config.WifiSSID} ağına bağlı olan arkadaşına bağlantıyı atarak\nkitabı onlarla da paylaşabilirsin. Ancak bağlantı yalnızca 5 dakika geçerli.",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    "Kitap .zip uzantılı inerse .epub olarak değiştirmen uyumlu program ile başlatman için yeterli olacaktır",
-                    style: TextStyle(fontSize: 10, color: Colors.grey),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Text(
-                    "İyi okumalar ( ͡ᵔ ͜ʖ ͡ᵔ )",
-                    style: TextStyle(fontSize: 30),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-            ),
-          ),
+                  "Kitabın hazır. Hazır olmasına ama..\nOkumak istediğin kitap: '${(book?.baslik ?? 'bilinmeyen')}'\nBulabildiğim kitap: '$title'\n\nAradığını bulabildiysem buyur devam et :)"),
+          // PageViewModel(
+          //   title: "Seni ağa bağlayalım!",
+          //   decoration: PageDecoration(
+          //     bodyAlignment: Alignment.center,
+          //   ),
+          //   bodyWidget: Center(
+          //     //padding: EdgeInsets.all(10),
+          //     child: Column(
+          //       crossAxisAlignment: CrossAxisAlignment.center,
+          //       mainAxisAlignment: MainAxisAlignment.center,
+          //       children: [
+          //         QrImage(
+          //           data: Service.toWifiQR(),
+          //           backgroundColor: Colors.white,
+          //           version: QrVersions.auto,
+          //           size: 320,
+          //           gapless: true,
+          //           semanticsLabel: "Connect to ${Service.config.WifiSSID}",
+          //         ),
+          //         SizedBox(
+          //           height: 10,
+          //         ),
+          //         Text(
+          //           "Akıllı telefon yazılımın destekliyorsa yukarıdaki Qr kodu okutarak ağa bağlanabilirsin.",
+          //           textAlign: TextAlign.center,
+          //           style: TextStyle(fontSize: 25),
+          //         ),
+          //         SizedBox(
+          //           height: 20,
+          //         ),
+          //         Column(
+          //           crossAxisAlignment: CrossAxisAlignment.start,
+          //           children: [
+          //             Text.rich(TextSpan(
+          //                 text: "Wifi SSID: ",
+          //                 style: TextStyle(),
+          //                 children: [
+          //                   TextSpan(
+          //                     text: Service.config.WifiSSID,
+          //                     style: TextStyle(color: Colors.orange),
+          //                   ),
+          //                 ])),
+          //             Text.rich(TextSpan(text: "Wifi Pass: ", children: [
+          //               TextSpan(
+          //                 text: Service.config.WifiPass ?? "",
+          //                 style: TextStyle(color: Colors.orange),
+          //               ),
+          //             ])),
+          //           ],
+          //         ),
+          //         SizedBox(
+          //           height: 30,
+          //         ),
+          //         Text(
+          //           "Dipnot: E-kitabı akıllı telefon/tabletine indirilebilmek için bu ağa bağlı olmak zorundasın.",
+          //           textAlign: TextAlign.center,
+          //           style: TextStyle(fontSize: 12),
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          //   useScrollView: false,
+          // ),
+          // PageViewModel(
+          //   title: "Haydi, indiiir",
+          //   bodyWidget: Center(
+          //     child: Column(
+          //       crossAxisAlignment: CrossAxisAlignment.center,
+          //       mainAxisAlignment: MainAxisAlignment.center,
+          //       mainAxisSize: MainAxisSize.min,
+          //       children: [
+          //         Text(
+          //           "Aşağıdaki QR kodu okutarak içeriği indirebilirsin",
+          //           textAlign: TextAlign.center,
+          //           style: TextStyle(fontSize: 20),
+          //         ),
+          //         SizedBox(
+          //           height: 30,
+          //         ),
+          //         QrImage(
+          //           data:
+          //               "${Service.config.ApiURL}/db?query=${Uri.encodeQueryComponent(title)}",
+          //           backgroundColor: Colors.white,
+          //           version: QrVersions.auto,
+          //           size: 320,
+          //           gapless: true,
+          //           semanticsLabel: "Download the document",
+          //         ),
+          //         SizedBox(
+          //           height: 30,
+          //         ),
+          //         Text(
+          //           "Dökümanı indirirken ${Service.config.WifiSSID} ağından ayrılma.\n${Service.config.WifiSSID} ağına bağlı olan arkadaşına bağlantıyı atarak\nkitabı onlarla da paylaşabilirsin. Ancak bağlantı yalnızca 5 dakika geçerli.",
+          //           textAlign: TextAlign.center,
+          //           style: TextStyle(fontSize: 16),
+          //         ),
+          //         SizedBox(
+          //           height: 20,
+          //         ),
+          //         Text(
+          //           "Kitap .zip uzantılı inerse .epub olarak değiştirmen uyumlu program ile başlatman için yeterli olacaktır",
+          //           style: TextStyle(fontSize: 10, color: Colors.grey),
+          //           textAlign: TextAlign.center,
+          //         ),
+          //         SizedBox(
+          //           height: 30,
+          //         ),
+          //         Text(
+          //           "İyi okumalar ( ͡ᵔ ͜ʖ ͡ᵔ )",
+          //           style: TextStyle(fontSize: 30),
+          //           textAlign: TextAlign.center,
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );

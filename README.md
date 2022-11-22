@@ -7,6 +7,8 @@ Supports libgen.
 ![last-commit](https://img.shields.io/github/last-commit/codeksion/libsohal?style=for-the-badge) ![last-release](https://img.shields.io/github/release-date/codeksion/libsohal?label=last%20release&style=for-the-badge)
 
 
+![](assets/libsohalpre.jpg)
+
 It's all Turkish. But you can use with fork in any language.
 
 ### Dependencies && Setup 
@@ -41,8 +43,11 @@ wget https://github.com/codeksion/LibSohal/releases/download/v0.2/backend
 wget https://github.com/codeksion/LibSohal/releases/download/v0.2/utils
 wget https://raw.githubusercontent.com/codeksion/LibSohal/main/backend/easyocrbin?token=GHSAT0AAAAAABKCRLGR54H7UNAIPUMIVX3GYUOFYMA -O easyorcbin
 ```
-client-side:
-Go to [releases](https://github.com/codeksion/LibSohal/releases/) or [download compiled apk](https://github.com/codeksion/LibSohal/releases/download/v0.2/libsohal-frontend.apk)
+
+All front-end activities going to web => /
+
+    client-side:
+    Go to [releases](https://github.com/codeksion/LibSohal/releases/) or [download compiled apk](https://github.com/codeksion/LibSohal/releases/download/v0.2/libsohal-frontend.apk)
 
 ### Dev Note
 Still development/draft project :)

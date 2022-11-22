@@ -76,6 +76,7 @@ func NewLibgen(c Config) (l *Libgen) {
 			// Library doesnot supporting context
 			books, err := libgenapi.Search(libgenapi.TextbookSearchInput{
 				Query: []string{query},
+
 				//Criteria: "def",
 				Page: 1,
 			})

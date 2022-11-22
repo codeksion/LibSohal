@@ -149,11 +149,15 @@ class BorrowBookInstructions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          label: Text("İptal")),
+      appBar: AppBar(
+        title: Text("Kitap ödünç al"),
+        backgroundColor: Color.fromRGBO(0, 0, 0, 0.3),
+      ),
+      // floatingActionButton: FloatingActionButton.extended(
+      //     onPressed: () {
+      //       Navigator.of(context).pop();
+      //     },
+      //     label: Text("İptal")),
       body: IntroductionScreen(
         onDone: () => redirectfn(context),
         onSkip: () => redirectfn(context),

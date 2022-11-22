@@ -12,6 +12,7 @@ class BookSearch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("search: $value|");
     if (value == ":panel") {
       return PanelAUTH();
     } else if (value == ":settings") {
